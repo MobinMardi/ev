@@ -1,3 +1,13 @@
+// Force page to load at the top on refresh
+if (history.scrollRestoration) {
+  history.scrollRestoration = "manual"
+}
+
+// Simple scroll to top on page load
+window.addEventListener("load", () => {
+  window.scrollTo(0, 0)
+})
+
 // Function to open the pop-up with the player's agent information
 function showPopup(agents) {
   const agentsContainer = document.getElementById("agents-container")
@@ -95,6 +105,14 @@ document.querySelectorAll("img").forEach((img) => {
     if (!this.src.includes("placeholder.com")) {
       this.src = `https://via.placeholder.com/${this.width}x${this.height}`
     }
+  })
+})
+
+// Prevent context menu on images and svgs
+document.querySelectorAll("img, svg").forEach((element) => {
+  element.addEventListener("contextmenu", (e) => {
+    e.preventDefault()
+    return false
   })
 })
 
