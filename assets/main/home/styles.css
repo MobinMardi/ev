@@ -12,6 +12,38 @@
   --section-spacing: 6rem;
 }
 
+/* Prevent text selection and image download */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+div {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+img,
+svg {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -32,6 +64,19 @@ body {
   line-height: 1.6;
 }
 
+/* Allow pointer events for interactive elements */
+a,
+button,
+.social-button,
+.connect-button {
+  pointer-events: auto;
+}
+
+.social-button img,
+.icon-wrapper img {
+  pointer-events: auto;
+}
+
 /* Background elements */
 .background-overlay {
   position: fixed;
@@ -46,8 +91,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: -3;
-  background: 
-    linear-gradient(90deg, transparent 49.5%, rgba(70, 0, 140, 0.1) 50%, transparent 50.5%),
+  background: linear-gradient(90deg, transparent 49.5%, rgba(70, 0, 140, 0.1) 50%, transparent 50.5%),
     linear-gradient(0deg, transparent 49.5%, rgba(70, 0, 140, 0.1) 50%, transparent 50.5%);
   background-size: 50px 50px;
   opacity: 0.3;
@@ -59,12 +103,17 @@ body {
   inset: 0;
   z-index: -4;
   background: radial-gradient(circle at top right, rgba(70, 0, 140, 0.3), transparent 70%),
-              radial-gradient(circle at bottom left, rgba(253, 69, 86, 0.2), transparent 70%);
+    radial-gradient(circle at bottom left, rgba(253, 69, 86, 0.2), transparent 70%);
   pointer-events: none;
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   line-height: 1.2;
@@ -118,7 +167,7 @@ a {
 }
 
 .logo::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -157,7 +206,7 @@ a {
 }
 
 .social-button::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.1);
@@ -178,6 +227,9 @@ a {
 }
 .social-button.spotify:hover {
   background-color: #1ed760;
+}
+.social-button.esports:hover {
+  background-color: #8451eb;
 }
 
 .icon-wrapper {
@@ -326,7 +378,7 @@ section {
 }
 
 .game-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -336,7 +388,7 @@ section {
 }
 
 .game-section::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -364,7 +416,7 @@ section {
 }
 
 .content-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -465,7 +517,7 @@ section {
 }
 
 .team-philosophy::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -510,7 +562,7 @@ section {
 }
 
 .connect-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -550,7 +602,7 @@ section {
 }
 
 .connect-button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -599,7 +651,8 @@ footer p {
 
 /* Animations */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -608,12 +661,88 @@ footer p {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
   }
   50% {
     opacity: 1;
   }
+}
+
+/* Animation classes for Intersection Observer */
+.animate-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Initial page load animations */
+.hero-content {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.team-logo {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards, float 6s ease-in-out infinite 0.8s;
+}
+
+.hero-text {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.team-name {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.tagline {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.7s;
+}
+
+.hero-description {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 0.9s;
+}
+
+/* Modify the existing animation keyframes to ensure they work for initial load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-card:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.content-card:nth-child(3) {
+  transition-delay: 0.4s;
+}
+
+.info-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.info-item:nth-child(3) {
+  transition-delay: 0.4s;
 }
 
 /* Custom scrollbar */
@@ -639,11 +768,11 @@ footer p {
   .team-name {
     font-size: 3.5rem;
   }
-  
+
   .team-name span {
     font-size: 2.5rem;
   }
-  
+
   .section-header h2 {
     font-size: 2.25rem;
   }
@@ -653,24 +782,24 @@ footer p {
   :root {
     --section-spacing: 4rem;
   }
-  
+
   .team-logo img {
     width: 200px;
     height: 200px;
   }
-  
+
   .team-name {
     font-size: 3rem;
   }
-  
+
   .team-name span {
     font-size: 2rem;
   }
-  
+
   .tagline {
     font-size: 1.25rem;
   }
-  
+
   .hero-description {
     font-size: 1.125rem;
   }
@@ -681,23 +810,23 @@ footer p {
     width: 180px;
     height: 180px;
   }
-  
+
   .team-name {
     font-size: 2.5rem;
   }
-  
+
   .team-name span {
     font-size: 1.75rem;
   }
-  
+
   .section-header h2 {
     font-size: 2rem;
   }
-  
+
   .team-content {
     gap: 2rem;
   }
-  
+
   .connect-content p {
     font-size: 1.125rem;
   }
@@ -707,44 +836,44 @@ footer p {
   :root {
     --section-spacing: 3rem;
   }
-  
+
   .team-logo img {
     width: 150px;
     height: 150px;
   }
-  
+
   .team-name {
     font-size: 2rem;
   }
-  
+
   .team-name span {
     font-size: 1.5rem;
   }
-  
+
   .tagline {
     font-size: 1.125rem;
   }
-  
+
   .hero-description {
     font-size: 1rem;
   }
-  
+
   .section-header h2 {
     font-size: 1.75rem;
   }
-  
+
   .content-card {
     padding: 1.5rem;
   }
-  
+
   .info-item {
     padding: 1.25rem;
   }
-  
+
   .team-philosophy {
     padding: 1.5rem;
   }
-  
+
   .connect-button {
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
