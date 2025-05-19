@@ -12,6 +12,38 @@
   --section-spacing: 6rem;
 }
 
+/* Prevent text selection and image download */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+div {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+img,
+svg {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -490,15 +522,16 @@ a {
   background: rgba(253, 69, 86, 1);
 }
 
-/* Prevent image selection and dragging */
-img {
-  user-select: none;
-  -webkit-user-drag: none;
+/* Allow pointer events for interactive elements */
+a,
+button,
+.social-button,
+.action-button {
+  pointer-events: auto;
 }
 
-/* Allow pointer events for interactive images */
 .social-button img,
-.player-box img {
+.icon-wrapper img {
   pointer-events: auto;
 }
 
