@@ -294,7 +294,7 @@ a {
   width: 4rem;
   height: auto;
   margin-right: 1rem;
-  filter: drop-shadow(0 0 15px rgba(255, 70, 85, 0.4));
+  filter: drop-shadow(0 0 15px rgba(54, 238, 224, 0.4));
   aspect-ratio: 1220 / 871;
   object-fit: contain;
   max-height: 4rem;
@@ -304,7 +304,7 @@ a {
   font-family: "Poppins", sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(90deg, #ff8eff, #96ffff);
+  background: linear-gradient(90deg, #ff92ba, #81ffff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -375,7 +375,7 @@ a {
 }
 
 .player-box:hover img {
-  border-color: var(--purple-light);
+  border-color: var(--accent-cyan);
   transform: scale(1.03);
 }
 
@@ -415,7 +415,7 @@ a {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+  background: linear-gradient(135deg, var(--accent-cyan), var(--purple-primary));
   color: var(--text-primary);
   border: none;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -473,7 +473,7 @@ a {
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--text-primary);
-  background: linear-gradient(90deg, var(--valorant-red), var(--purple-light));
+  background: linear-gradient(90deg, var(--accent-cyan), var(--purple-light));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -498,14 +498,14 @@ a {
 
 .agent-info:hover {
   transform: translateY(-3px);
-  border-color: var(--purple-light);
+  border-color: var(--accent-cyan);
 }
 
 .agent-info img {
   width: 3rem;
   height: 3rem;
   margin-bottom: 0.5rem;
-  filter: drop-shadow(0 0 5px rgba(106, 60, 181, 0.5));
+  filter: drop-shadow(0 0 5px rgba(54, 238, 224, 0.5));
 }
 
 .agent-info p {
@@ -587,12 +587,12 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(var(--valorant-red), var(--purple-light));
+  background: linear-gradient(var(--accent-cyan), var(--purple-light));
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(var(--valorant-red), var(--accent-cyan));
+  background: linear-gradient(var(--accent-cyan), var(--accent-pink));
 }
 
 /* Responsive adjustments */
@@ -644,6 +644,18 @@ a {
 
   .main-content {
     padding: 6rem 0.75rem 3rem;
+  }
+
+  /* Responsive button fixes */
+  .action-button {
+    font-size: 0.85rem;
+    padding: 0.56rem 1.5rem;
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+
+  .action-button:hover {
+    transform: translateY(-3px) scale(0.75);
   }
 }
 

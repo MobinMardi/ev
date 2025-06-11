@@ -878,6 +878,18 @@ footer p {
   .connect-content p {
     font-size: 1.125rem;
   }
+
+  /* Responsive button fixes */
+  .connect-button {
+    font-size: 0.85rem;
+    padding: 0.56rem 1.5rem;
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+
+  .connect-button:hover {
+    transform: translateY(-3px) scale(0.75);
+  }
 }
 
 @media (max-width: 576px) {
