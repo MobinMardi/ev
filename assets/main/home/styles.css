@@ -144,11 +144,11 @@ a {
   z-index: 50;
   padding: 1rem 0;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(15, 10, 26, 0.85);
-  border-bottom: 1px solid rgba(106, 60, 181, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -246,6 +246,17 @@ a {
   border-color: var(--purple-light);
 }
 
+/* Add this to the social button hover styles section */
+.social-button.instagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: #cc2366;
+}
+
+.social-button.instagram:active {
+  background: linear-gradient(45deg, #d07b2b 0%, #c45733 25%, #b82038 50%, #a81d55 75%, #9c1472 100%);
+  border-color: #a81d55;
+}
+
 .icon-wrapper {
   width: 1.5rem;
   height: 1.5rem;
@@ -328,7 +339,7 @@ main {
 .team-name {
   font-size: 4rem;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, var(--valorant-red), var(--purple-light), var(--accent-cyan));
+  background: linear-gradient(90deg, #ffffff, #9bffff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
