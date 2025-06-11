@@ -76,6 +76,11 @@ button,
   pointer-events: auto;
 }
 
+.social-button img,
+.icon-wrapper img {
+  pointer-events: auto;
+}
+
 /* Background elements */
 .background-overlay {
   position: fixed;
@@ -287,9 +292,12 @@ a {
 
 .team-header img {
   width: 4rem;
-  height: 4rem;
+  height: auto;
   margin-right: 1rem;
   filter: drop-shadow(0 0 15px rgba(255, 70, 85, 0.4));
+  aspect-ratio: 1220 / 871;
+  object-fit: contain;
+  max-height: 4rem;
 }
 
 .gradient-text {
@@ -585,12 +593,6 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(var(--valorant-red), var(--accent-cyan));
-}
-
-/* Allow pointer events for interactive images */
-.social-button img,
-.player-box img {
-  pointer-events: auto;
 }
 
 /* Responsive adjustments */

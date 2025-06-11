@@ -68,6 +68,19 @@ body {
   line-height: 1.6;
 }
 
+/* Allow pointer events for interactive elements */
+a,
+button,
+.social-button,
+.action-button {
+  pointer-events: auto;
+}
+
+.social-button img,
+.icon-wrapper img {
+  pointer-events: auto;
+}
+
 /* Background elements */
 .background-overlay {
   position: fixed;
@@ -120,19 +133,6 @@ a {
   color: var(--text-primary);
   text-decoration: none;
   transition: all 0.3s ease;
-}
-
-/* Allow pointer events for interactive elements */
-a,
-button,
-.social-button,
-.action-button {
-  pointer-events: auto;
-}
-
-.social-button img,
-.icon-wrapper img {
-  pointer-events: auto;
 }
 
 /* Navbar */
@@ -292,9 +292,12 @@ button,
 
 .team-header img {
   width: 4rem;
-  height: 4rem;
+  height: auto;
   margin-right: 1rem;
   filter: drop-shadow(0 0 15px rgba(54, 238, 224, 0.4));
+  aspect-ratio: 1220 / 871;
+  object-fit: contain;
+  max-height: 4rem;
 }
 
 .gradient-text {

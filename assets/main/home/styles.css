@@ -309,12 +309,16 @@ main {
   margin-bottom: 2rem;
   animation: float 6s ease-in-out infinite;
   filter: drop-shadow(0 0 25px rgba(106, 60, 181, 0.7));
+  max-width: 320px;
+  width: 100%;
 }
 
 .team-logo img {
-  width: 240px;
-  height: 240px;
+  width: 100%;
+  height: auto;
+  max-width: 320px;
   object-fit: contain;
+  aspect-ratio: 1280 / 914;
 }
 
 .hero-text {
@@ -810,9 +814,12 @@ footer p {
     --section-spacing: 4rem;
   }
 
+  .team-logo {
+    max-width: 280px;
+  }
+
   .team-logo img {
-    width: 200px;
-    height: 200px;
+    max-width: 280px;
   }
 
   .team-name {
@@ -833,9 +840,12 @@ footer p {
 }
 
 @media (max-width: 768px) {
+  .team-logo {
+    max-width: 240px;
+  }
+
   .team-logo img {
-    width: 180px;
-    height: 180px;
+    max-width: 240px;
   }
 
   .team-name {
@@ -864,9 +874,12 @@ footer p {
     --section-spacing: 3rem;
   }
 
+  .team-logo {
+    max-width: 200px;
+  }
+
   .team-logo img {
-    width: 150px;
-    height: 150px;
+    max-width: 200px;
   }
 
   .team-name {
