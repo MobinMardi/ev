@@ -890,55 +890,61 @@ footer p {
   .connect-button:hover {
     transform: translateY(-3px) scale(0.75);
   }
-}
 
-@media (max-width: 576px) {
-  :root {
-    --section-spacing: 3rem;
+  /* Reduce the gap between buttons */
+  .connect-buttons {
+    gap: 0.5rem;
   }
 
-  .team-logo {
-    max-width: 200px;
+  /* Adjust navbar spacing */
+  .nav-container {
+    justify-content: space-between;
+    padding: 0 0.5rem;
   }
 
-  .team-logo img {
-    max-width: 200px;
-  }
-
-  .team-name {
-    font-size: 2rem;
-  }
-
-  .team-name span {
+  /* Make logo smaller on mobile */
+  .logo {
     font-size: 1.5rem;
   }
 
-  .tagline {
-    font-size: 1.125rem;
+  /* Adjust social buttons container */
+  .social-buttons {
+    gap: 0.5rem;
   }
 
-  .hero-description {
-    font-size: 1rem;
+  /* Make social buttons smaller */
+  .social-button {
+    width: 2.25rem;
+    height: 2.25rem;
   }
 
-  .section-header h2 {
-    font-size: 1.75rem;
+  /* Make icons 10% smaller */
+  .icon-wrapper img {
+    transform: scale(0.9);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Even smaller screens */
+  .connect-buttons {
+    gap: 0.25rem;
   }
 
-  .content-card {
-    padding: 1.5rem;
+  .logo {
+    font-size: 1.25rem;
   }
 
-  .info-item {
-    padding: 1.25rem;
+  .social-buttons {
+    gap: 0.25rem;
   }
 
-  .team-philosophy {
-    padding: 1.5rem;
+  .social-button {
+    width: 2rem;
+    height: 2rem;
   }
 
-  .connect-button {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+  /* Make icons even smaller on very small screens */
+  .icon-wrapper img {
+    transform: scale(0.85);
   }
 }

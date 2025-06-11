@@ -647,6 +647,10 @@ a {
   }
 
   /* Responsive button fixes */
+  .button-container {
+    gap: 0.5rem;
+  }
+
   .action-button {
     font-size: 0.85rem;
     padding: 0.56rem 1.5rem;
@@ -657,12 +661,42 @@ a {
   .action-button:hover {
     transform: translateY(-3px) scale(0.75);
   }
+
+  /* Adjust navbar spacing */
+  .nav-container {
+    justify-content: space-between;
+    padding: 0 0.5rem;
+  }
+
+  /* Adjust social buttons container */
+  .social-buttons {
+    gap: 0.5rem;
+  }
+
+  /* Make social buttons smaller */
+  .social-button {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .player-box {
-    width: 80%;
-    max-width: 250px;
+  /* Even smaller screens */
+  .button-container {
+    gap: 0.25rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .social-buttons {
+    gap: 0.25rem;
+  }
+
+  .social-button {
+    width: 2rem;
+    height: 2rem;
   }
 }
 
