@@ -64,8 +64,11 @@ body {
   background: var(--background);
   color: var(--text-primary);
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   line-height: 1.6;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Allow pointer events for interactive elements */
@@ -151,6 +154,12 @@ a {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+.navbar.scrolled {
+  padding: 0.75rem 0;
+  background-color: rgba(15, 10, 26, 0.95);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
 .nav-container {
   width: 90%;
   max-width: 1400px;
@@ -229,17 +238,9 @@ a {
   transform: scale(1);
 }
 
-.social-button.discord:hover {
-  background-color: #7289d2;
-  border-color: #7289d2;
-}
 .social-button.valorant:hover {
   background-color: var(--valorant-red);
   border-color: var(--valorant-red);
-}
-.social-button.spotify:hover {
-  background-color: #1ed760;
-  border-color: #1ed760;
 }
 .social-button.esports:hover {
   background-color: var(--purple-light);
@@ -265,6 +266,7 @@ a {
 /* Main content */
 main {
   padding-top: 4rem;
+  flex: 1 0 auto;
 }
 
 .section-container {
@@ -278,6 +280,7 @@ main {
 .hero {
   position: relative;
   min-height: 90vh;
+  min-height: 90dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -422,7 +425,7 @@ section {
 
 .content-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: 2rem;
 }
 
@@ -493,7 +496,7 @@ section {
 
 .team-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
   gap: 2rem;
 }
 
@@ -687,6 +690,7 @@ footer {
   padding: 2rem 0;
   border-top: 1px solid rgba(106, 60, 181, 0.3);
   text-align: center;
+  flex-shrink: 0;
 }
 
 .footer-content {

@@ -8,34 +8,28 @@ window.addEventListener("load", () => {
   window.scrollTo(0, 0)
 })
 
-// Update copyright year
-document.getElementById("current-year").textContent = new Date().getFullYear()
-
-// Navbar scroll effect
+// Navbar scroll effect (colors/padding live in CSS via the .scrolled class,
+// so JS and CSS can never drift out of sync)
 const navbar = document.querySelector(".navbar")
-let lastScrollY = window.scrollY
+let ticking = false
 
 function updateNavbar() {
-  const scrollY = window.scrollY
+  navbar.classList.toggle("scrolled", window.scrollY > 100)
+  ticking = false
+}
 
-  if (scrollY > 100) {
-    navbar.style.padding = "0.75rem 0"
-    navbar.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.1)"
-    navbar.style.background = "rgba(8, 0, 8, 0.9)"
-  } else {
-    navbar.style.padding = "1rem 0"
-    navbar.style.boxShadow = "none"
-    navbar.style.background = "rgba(8, 0, 8, 0.8)"
+function onScroll() {
+  if (!ticking) {
+    requestAnimationFrame(updateNavbar)
+    ticking = true
   }
-
-  lastScrollY = scrollY
 }
 
 // Update navbar on load
 updateNavbar()
 
-// Update navbar on scroll
-window.addEventListener("scroll", updateNavbar)
+// Update navbar on scroll (rAF-throttled so it doesn't run more than once per frame)
+window.addEventListener("scroll", onScroll, { passive: true })
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -58,14 +52,23 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   })
 })
 
-// Handle image load errors
+// Logo: smooth-scroll to top instead of a hard page reload when already home
+const logoLink = document.getElementById("logo-link")
+if (logoLink) {
+  logoLink.addEventListener("click", (e) => {
+    e.preventDefault()
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  })
+}
+
+// Handle image load errors with a local inline fallback (no third-party dependency)
 document.querySelectorAll("img").forEach((img) => {
   img.addEventListener("error", function () {
-    if (!this.src.includes("placeholder.com")) {
-      const width = this.getAttribute("width") || 100
-      const height = this.getAttribute("height") || 100
-      this.src = `https://via.placeholder.com/${width}x${height}?text=EV`
-    }
+    if (this.dataset.fallbackApplied) return
+    this.dataset.fallbackApplied = "true"
+    const width = this.getAttribute("width") || this.width || 100
+    const height = this.getAttribute("height") || this.height || 100
+    this.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><rect width="100%25" height="100%25" fill="%231b1032"/><text x="50%25" y="50%25" fill="%23c4c9df" font-family="sans-serif" font-size="14" text-anchor="middle" dominant-baseline="middle">EV</text></svg>`
   })
 })
 
@@ -87,6 +90,7 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("animate-in")
+      observer.unobserve(entry.target)
     }
   })
 }, observerOptions)
@@ -99,85 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
     currentYearSpan.textContent = new Date().getFullYear()
   }
 
-  // Add animation classes to elements
-  const style = document.createElement("style")
-  style.textContent = `
-    .animate-element {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    
-    .animate-in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .content-card:nth-child(2) {
-      transition-delay: 0.2s;
-    }
-    
-    .content-card:nth-child(3) {
-      transition-delay: 0.4s;
-    }
-    
-    .info-item:nth-child(2) {
-      transition-delay: 0.2s;
-    }
-    
-    .info-item:nth-child(3) {
-      transition-delay: 0.4s;
-    }
-  `
-  document.head.appendChild(style)
-
   // Add animation classes to elements that should animate on scroll
+  // (.animate-element / .animate-in / transition-delay rules already live in styles.css)
   document
     .querySelectorAll(".section-header, .content-card, .info-item, .team-philosophy, .connect-content")
     .forEach((el) => {
       el.classList.add("animate-element")
       observer.observe(el)
     })
-
-  // Parallax effect for hero section
-  const heroSection = document.querySelector(".hero")
-  const teamLogo = document.querySelector(".team-logo")
-
-  if (heroSection && teamLogo) {
-    // Float animation is now handled by CSS
-    // No need to add it here
-  }
 })
-
-// Parallax effect for hero section
-window.addEventListener("scroll", () => {
-  const heroSection = document.querySelector(".hero")
-  const teamLogo = document.querySelector(".team-logo")
-
-  if (heroSection && teamLogo) {
-    const scrollPosition = window.scrollY
-    const heroHeight = heroSection.offsetHeight
-
-    if (scrollPosition <= heroHeight) {
-      const parallaxValue = scrollPosition * 0.2
-      teamLogo.style.transform = `translateY(${-parallaxValue}px)`
-    }
-  }
-})
-
-// Define float animation if not already in CSS
-if (!document.querySelector("#float-animation")) {
-  const floatAnimation = document.createElement("style")
-  floatAnimation.id = "float-animation"
-  floatAnimation.textContent = `
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
-  `
-  document.head.appendChild(floatAnimation)
-}
