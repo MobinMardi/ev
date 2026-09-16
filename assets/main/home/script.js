@@ -12,9 +12,19 @@ window.addEventListener("load", () => {
 // so JS and CSS can never drift out of sync)
 const navbar = document.querySelector(".navbar")
 let ticking = false
+let lastScroll = 0
 
 function updateNavbar() {
-  navbar.classList.toggle("scrolled", window.scrollY > 100)
+  const currentScroll = window.scrollY
+  navbar.classList.toggle("scrolled", currentScroll > 100)
+
+  // Hide navbar when scrolling down past the hero, reveal on scroll up
+  if (currentScroll > lastScroll && currentScroll > 200) {
+    navbar.classList.add("nav-hidden")
+  } else {
+    navbar.classList.remove("nav-hidden")
+  }
+  lastScroll = currentScroll
   ticking = false
 }
 

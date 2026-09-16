@@ -1,19 +1,88 @@
-/* Base styles */
+/* Self-hosted fonts — no external network dependency, always renders correctly */
+@font-face {
+  font-family: "Tektur";
+  src: url("../../fonts/tektur-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Tektur";
+  src: url("../../fonts/tektur-medium.woff") format("woff");
+  font-weight: 500 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("../../fonts/outfit-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("../../fonts/outfit-bold.woff") format("woff");
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base styles — palette matched to mobinmardi.github.io (Material 3 / glass) */
 :root {
-  --background: #0f0a1a;
-  --text-primary: #ffffff;
-  --text-secondary: #c4c9df;
-  --purple-primary: #6a3cb5;
-  --purple-secondary: #512b75;
-  --purple-dark: #2b1840;
-  --purple-light: #8a4fff;
-  --purple-border: rgba(106, 60, 181, 0.4);
-  --valorant-red: #ff4655;
-  --valorant-red-dark: #cc3644;
-  --card-bg: rgba(27, 16, 50, 0.7);
+  --bg-base: #120c1e;
+  --bg-base-rgb: 18, 12, 30;
+  --primary: #a855f7;
+  --primary-rgb: 168, 85, 247;
+  --secondary: #22d3ee;
+  --secondary-rgb: 34, 211, 238;
+  --tertiary: #ec4899;
+  --tertiary-rgb: 236, 72, 153;
+  --on-primary: #2b0a4e;
+  --on-surface: #f4f2f7;
+  --on-surface-variant: #b8b3c7;
+  --outline: #7c7690;
+
+  --glass-fill: rgba(35, 26, 54, 0.5);
+  --glass-fill-strong: rgba(35, 26, 54, 0.72);
+  --glass-border: rgba(168, 85, 247, 0.28);
+  --glass-border-soft: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 1px 1px rgba(255, 255, 255, 0.07) inset;
+  --glass-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.55), 0 1px 1px rgba(255, 255, 255, 0.1) inset;
+
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 9999px;
+
+  /* Legacy names kept so every existing rule below picks up the new palette automatically */
+  --background: var(--bg-base);
+  --text-primary: var(--on-surface);
+  --text-secondary: var(--on-surface-variant);
+  --purple-primary: var(--primary);
+  --purple-secondary: var(--secondary);
+  --purple-dark: var(--glass-fill-strong);
+  --purple-light: var(--primary);
+  --purple-border: var(--glass-border);
+  --valorant-red: var(--tertiary);
+  --valorant-red-dark: #c2367a;
+  --card-bg: var(--glass-fill);
   --section-spacing: 6rem;
-  --accent-cyan: #36eee0;
-  --accent-pink: #ff6ec7;
+  --accent-cyan: #22d3ee;
+  --accent-pink: var(--tertiary);
+
+  /* Per-page logo gradient */
+  --logo-gradient: linear-gradient(90deg, #ff8a80, #ffffff, #22d3ee);
+
+  /* Motion system */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --dur-fast: 0.25s;
+  --dur-base: 0.45s;
+  --dur-slow: 0.7s;
 }
 
 /* Prevent text selection and image download */
@@ -60,7 +129,7 @@ html {
 }
 
 body {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: var(--background);
   color: var(--text-primary);
   min-height: 100vh;
@@ -98,8 +167,8 @@ button,
   position: fixed;
   inset: 0;
   z-index: -3;
-  background: linear-gradient(90deg, transparent 49.5%, rgba(106, 60, 181, 0.1) 50%, transparent 50.5%),
-    linear-gradient(0deg, transparent 49.5%, rgba(106, 60, 181, 0.1) 50%, transparent 50.5%);
+  background: linear-gradient(90deg, transparent 49.5%, rgba(var(--primary-rgb), 0.1) 50%, transparent 50.5%),
+    linear-gradient(0deg, transparent 49.5%, rgba(var(--primary-rgb), 0.1) 50%, transparent 50.5%);
   background-size: 50px 50px;
   opacity: 0.3;
   pointer-events: none;
@@ -109,9 +178,9 @@ button,
   position: fixed;
   inset: 0;
   z-index: -4;
-  background: radial-gradient(circle at top right, rgba(106, 60, 181, 0.3), transparent 70%),
-    radial-gradient(circle at bottom left, rgba(255, 70, 85, 0.2), transparent 70%),
-    radial-gradient(circle at center, rgba(54, 238, 224, 0.05), transparent 50%);
+  background: radial-gradient(circle at top right, rgba(var(--primary-rgb), 0.3), transparent 70%),
+    radial-gradient(circle at bottom left, rgba(var(--tertiary-rgb), 0.2), transparent 70%),
+    radial-gradient(circle at center, rgba(34, 211, 238, 0.05), transparent 50%);
   pointer-events: none;
 }
 
@@ -122,7 +191,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Tektur", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -149,15 +218,23 @@ a {
   transition: all 0.3s ease;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(17, 25, 40, 0.75);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+  background-color: var(--glass-fill);
+  border-bottom: 1px solid var(--glass-border);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .navbar.scrolled {
   padding: 0.75rem 0;
-  background-color: rgba(15, 10, 26, 0.95);
+  background-color: var(--glass-fill-strong);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.navbar {
+  transition: transform var(--dur-base) var(--ease-premium), background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.navbar.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .nav-container {
@@ -170,16 +247,20 @@ a {
 }
 
 .logo {
-  font-family: "Poppins", sans-serif;
+  font-family: "Tektur", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.875rem;
   font-weight: 800;
-  letter-spacing: -0.05em;
-  color: var(--text-primary);
+  letter-spacing: -0.03em;
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
   padding: 0.25rem 0;
-  text-shadow: 0 0 10px rgba(106, 60, 181, 0.5);
+  background: var(--logo-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgba(var(--primary-rgb), 0.35));
 }
 
 .logo::after {
@@ -189,12 +270,12 @@ a {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, var(--valorant-red), var(--purple-light));
+  background: var(--logo-gradient);
   transition: width 0.3s ease;
 }
 
 .logo:hover {
-  color: var(--valorant-red);
+  filter: drop-shadow(0 0 18px rgba(var(--primary-rgb), 0.55));
 }
 
 .logo:hover::after {
@@ -220,7 +301,7 @@ a {
   position: relative;
   overflow: hidden;
   background: rgba(27, 16, 50, 0.6);
-  border: 1px solid rgba(106, 60, 181, 0.3);
+  border: 1px solid rgba(var(--primary-rgb), 0.3);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -303,14 +384,14 @@ a {
   width: 4rem;
   height: auto;
   margin-right: 1rem;
-  filter: drop-shadow(0 0 15px rgba(54, 238, 224, 0.4));
+  filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.4));
   aspect-ratio: 1220 / 871;
   object-fit: contain;
   max-height: 4rem;
 }
 
 .gradient-text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Tektur", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   background: linear-gradient(90deg, #ff92ba, #81ffff);
@@ -334,19 +415,22 @@ a {
 
 .player-box {
   background: linear-gradient(135deg, rgba(27, 16, 50, 0.8), rgba(43, 24, 64, 0.8));
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   width: 170px;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: transform var(--dur-base) var(--ease-premium),
+    box-shadow var(--dur-base) var(--ease-premium),
+    border-color var(--dur-base) var(--ease-premium);
   cursor: pointer;
   border: 1px solid var(--purple-border);
   opacity: 0;
-  animation: fadeInPlayer 0.5s ease-out forwards;
-  animation-delay: calc(var(--animation-order) * 0.1s + 0.3s);
+  animation: fadeInPlayer 0.6s var(--ease-out-soft) forwards;
+  animation-delay: calc(var(--animation-order) * 0.09s + 0.3s);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
+  will-change: transform;
 }
 
 .player-box::before {
@@ -356,19 +440,31 @@ a {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(54, 238, 224, 0.1), transparent 70%);
+  background: radial-gradient(circle, rgba(var(--primary-rgb), 0.12), transparent 70%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--dur-base) var(--ease-premium);
+  pointer-events: none;
 }
 
-.player-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
-  border-color: rgba(106, 60, 181, 0.6);
+@media (hover: hover) and (pointer: fine) {
+  .player-box:hover {
+    transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--primary-rgb), 0.6);
+  }
+
+  .player-box:hover::before {
+    opacity: 1;
+  }
+
+  .player-box:hover img {
+    border-color: var(--accent-cyan);
+    transform: scale(1.05);
+  }
 }
 
-.player-box:hover::before {
-  opacity: 1;
+.player-box:active {
+  transform: translateY(-2px) scale(0.99);
 }
 
 .player-box img {
@@ -379,17 +475,12 @@ a {
   aspect-ratio: 1 / 1;
   object-fit: cover;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  border: 2px solid rgba(106, 60, 181, 0.3);
-  transition: all 0.3s ease;
-}
-
-.player-box:hover img {
-  border-color: var(--accent-cyan);
-  transform: scale(1.03);
+  border: 2px solid rgba(var(--primary-rgb), 0.3);
+  transition: transform var(--dur-base) var(--ease-premium), border-color var(--dur-base) var(--ease-premium);
 }
 
 .player-box h3 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Tektur", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 600;
   font-size: 1.125rem;
   margin-bottom: 0.25rem;
@@ -417,10 +508,10 @@ a {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 2rem;
-  border-radius: 8px;
+  border-radius: var(--radius-full);
   font-weight: 600;
   font-size: 1.125rem;
-  transition: all 0.3s ease;
+  transition: transform var(--dur-base) var(--ease-premium), box-shadow var(--dur-base) var(--ease-premium);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -428,28 +519,36 @@ a {
   color: var(--text-primary);
   border: none;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  isolation: isolate;
 }
 
 .action-button::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: -60%;
+  width: 40%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  z-index: -1;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  transition: transform var(--dur-slow) var(--ease-premium);
+  z-index: 2;
+  pointer-events: none;
 }
 
-.action-button:hover::before {
-  transform: translateX(0);
+@media (hover: hover) and (pointer: fine) {
+  .action-button:hover::before {
+    transform: skewX(-20deg) translateX(330%);
+  }
+
+  .action-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.35);
+  }
 }
 
-.action-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+.action-button:active {
+  transform: translateY(-1px);
 }
 
 /* Popup */
@@ -470,7 +569,7 @@ a {
 .popup-content {
   background: linear-gradient(135deg, rgba(27, 16, 50, 0.9), rgba(43, 24, 64, 0.9));
   border: 1px solid var(--purple-border);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 1.5rem;
   width: 90%;
   max-width: 400px;
@@ -480,7 +579,7 @@ a {
   margin: 0;
   flex-shrink: 0;
   text-align: center;
-  animation: fadeInPopup 0.3s ease-out;
+  animation: fadeInPopup 0.4s var(--ease-premium);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
@@ -489,7 +588,7 @@ a {
 }
 
 .popup-content h3 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Tektur", "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -512,8 +611,8 @@ a {
   text-align: center;
   background: rgba(15, 10, 26, 0.5);
   padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid rgba(106, 60, 181, 0.2);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
   transition: all 0.3s ease;
 }
 
@@ -526,7 +625,7 @@ a {
   width: 3rem;
   height: 3rem;
   margin-bottom: 0.5rem;
-  filter: drop-shadow(0 0 5px rgba(54, 238, 224, 0.5));
+  filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.5));
 }
 
 .agent-info p {
@@ -541,7 +640,7 @@ a {
   text-align: center;
   font-size: 0.875rem;
   color: var(--text-secondary);
-  border-top: 1px solid rgba(106, 60, 181, 0.3);
+  border-top: 1px solid rgba(var(--primary-rgb), 0.3);
   background: rgba(15, 10, 26, 0.95);
   flex-shrink: 0;
 }
@@ -693,4 +792,28 @@ a {
 /* Fix for body scroll when popup is open */
 .body-no-scroll {
   overflow: hidden;
+}
+
+/* Lighten the most expensive paint work on small/touch screens */
+@media (max-width: 768px) {
+  .navbar {
+    backdrop-filter: blur(8px) saturate(140%);
+    -webkit-backdrop-filter: blur(8px) saturate(140%);
+  }
+}
+
+/* Respect the user's OS-level reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .navbar.nav-hidden {
+    transform: none;
+  }
 }
